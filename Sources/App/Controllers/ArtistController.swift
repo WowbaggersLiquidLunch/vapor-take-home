@@ -1,6 +1,6 @@
 import Vapor
 
-/// A controller for artist-related endpoint logics.
+/// A controller for artist-related endpoints.
 final class ArtistController {
     
     /// Searches for an artist as requested.
