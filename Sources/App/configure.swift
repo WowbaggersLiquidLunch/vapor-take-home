@@ -4,8 +4,8 @@ import Vapor
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     
-    // This extension registers any environment variables in .env with the application
-    Environment.dotenv()
+    // This extension registers any environment variables in 'Vapor Take Home.env' with the application
+    Environment.dotenv(filename: "Vapor Take Home.env")
     
     // Register providers first
     try services.register(FluentPostgreSQLProvider())
