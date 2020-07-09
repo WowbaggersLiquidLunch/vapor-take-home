@@ -14,5 +14,6 @@ struct Artist: Codable {
     }
 }
 
-/// Allows `Artist` to be encoded to and decoded from HTTP messages.
+// MARK: - Content Conformance
+// Allows `Artist` to be encoded to and decoded from HTTP messages.
 extension Artist: Content { }
