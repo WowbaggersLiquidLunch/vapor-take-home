@@ -1,5 +1,6 @@
 import Vapor
 
+/// A controller for artist-related endpoint logics.
 final class ArtistController {
     
     /// Searches for an artist as requested.
@@ -20,4 +21,5 @@ final class ArtistController {
         let service = try request.make(ArtistService.self)
         return try service.searchSongs(title: songTitle, byArtistID: artistID, on: request)
     }
+    
 }
