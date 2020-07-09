@@ -31,12 +31,12 @@ final class UserController {
     /// - Parameter request: The request that specifies which user to update.
     /// - Returns: A future of the user.
     func update(_ request: Request) throws -> Future<User> {
-        try request.parameters.next(User.self).flatMap({ user -> EventLoopFuture<User> in
+        try request.parameters.next(User.self).flatMap { user -> EventLoopFuture<User> in
             try request.content.decode(User.self).flatMap { updatedUser -> EventLoopFuture<User> in
                 user.name = updatedUser.name
                 return user.update(on: request)
             }
-        })
+        }
     }
 
     /// Deletes a user specified in the given request's parameter.
