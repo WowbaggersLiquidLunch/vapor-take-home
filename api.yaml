@@ -493,7 +493,9 @@ components:
         title:
           type: string
         label:
-          type: string
+          type: array
+          items:
+            type: string
         thumb:
           type: string
     Songs:
@@ -514,10 +516,7 @@ components:
         description:
           type: string
         songs:
-          type: array
-          readOnly: true
-          items:
-            type: integer
+          $ref: "#/components/schemas/Songs"
     Playlists:
       type: object
       properties:
