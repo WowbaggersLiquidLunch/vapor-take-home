@@ -492,7 +492,7 @@ components:
           type: integer
         title:
           type: string
-        label:
+        labels:
           type: array
           items:
             type: string
