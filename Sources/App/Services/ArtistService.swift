@@ -1,4 +1,3 @@
-import Foundation
 import Vapor
 
 /// A service for artist-related endpoints.
