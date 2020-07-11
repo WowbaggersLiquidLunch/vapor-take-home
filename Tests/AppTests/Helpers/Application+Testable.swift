@@ -17,6 +17,9 @@ extension Application {
 
         services.register(MockArtistService(), as: ArtistService.self)
         config.prefer(MockArtistService.self, for: ArtistService.self)
+        
+        services.register(MockPlaylistService(), as: PlaylistService.self)
+        config.prefer(MockPlaylistService.self, for: PlaylistService.self)
 
         let app = try Application(config: config, environment: env, services: services)
         
@@ -31,6 +34,7 @@ extension Application {
         try Application.testable(envArgs: migrateEnvironment).asyncRun().wait()
     }
     
+    @discardableResult
     func sendRequest<T>(to path: String, method: HTTPMethod, headers: HTTPHeaders = .init(), body: T? = nil) throws -> Response where T: Content {
         let responder = try self.make(Responder.self)
         let request = HTTPRequest(method: method, url: URL(string: path)!, headers: headers)
@@ -41,7 +45,8 @@ extension Application {
         return try responder.respond(to: wrappedRequest).wait()
     }
     
-    @discardableResult func sendRequest(to path: String, method: HTTPMethod, headers: HTTPHeaders = .init()) throws -> Response {
+    @discardableResult
+    func sendRequest(to path: String, method: HTTPMethod, headers: HTTPHeaders = .init()) throws -> Response {
         let emptyContent: EmptyContent? = nil
         return try sendRequest(to: path, method: method, headers: headers, body: emptyContent)
     }

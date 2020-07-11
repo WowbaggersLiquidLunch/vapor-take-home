@@ -1,14 +1,17 @@
 import Vapor
 
-struct DiscogService: ArtistService {
-    
+struct DiscogsService {
     /// The shared component among Discogs APIs.
     private let discogsAPIBaseURL = URL(string: "https://api.discogs.com")!
-    
     /// The HTTP headers that include the required Discorgs API token.
     private let headers: HTTPHeaders = [
         "Authorization": "Discogs token=\(Environment.apiToken)"
     ]
+}
+
+// MARK: - ArtistService Conformance
+
+extension DiscogsService: ArtistService {
     
     /// Searches for an artist as requested.
     /// - Parameters:
@@ -56,4 +59,22 @@ struct DiscogService: ArtistService {
         }
     }
     
+}
+
+// MARK: - PlaylistService Conformance
+
+extension DiscogsService: PlaylistService {
+    /// Retrieves the details of a song by its given ID.
+    /// - Parameters:
+    ///   - songID: The song's ID.
+    ///   - request: The request for this search.
+    /// - Returns: A future of the song's details.
+    func searchSong(byID songID: Int, on request: Request) throws -> Future<Song> {
+        let releaseURLRelativePath = "/releases/\(songID)"
+        let releaseURL = discogsAPIBaseURL.appendingPathComponent(releaseURLRelativePath)
+        
+        return try request.client().get(releaseURL, headers: headers).flatMap { response in
+            try response.content.decode(Song.self)
+        }
+    }
 }

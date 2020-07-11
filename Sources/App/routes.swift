@@ -44,4 +44,35 @@ public func routes(_ router: Router) throws {
     router.get("artists", Int.parameter, "songs", "search", use: artistController.searchSongs)
     
     // MARK: - Playlists Requests
+    
+    let playlistController = PlaylistController()
+    
+    // POST /playlists
+    // Create a new playlist.
+    router.post("playlists", use: playlistController.create)
+    
+    // GET /playlists
+    // List playlists.
+    router.get("playlists", use: playlistController.index)
+    
+    // GET /playlists/{playlistID}
+    // Find playlist by ID.
+    router.get("playlists", Playlist.parameter, use: playlistController.find)
+    
+    // GET /playlists/{playlistID}
+    // Update a playlist.
+    router.put("playlists", Playlist.parameter, use: playlistController.update)
+    
+    // DELETE /playlists/{playlistID}
+    // Delete a playlist.
+    router.delete("playlists", Playlist.parameter, use: playlistController.delete)
+    
+    // POST /playlists/{playlistID}/songs/{songID}
+    // Add song to playlist.
+    router.post("playlists", Playlist.parameter, "songs", Int.parameter, use: playlistController.addSong)
+    
+    // /playlists/{playlistID}/songs/{songID}
+    // Remove song from a playlist.
+    router.delete("playlists", Playlist.parameter, "songs", Int.parameter, use: playlistController.removeSong)
+    
 }

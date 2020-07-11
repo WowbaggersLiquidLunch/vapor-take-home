@@ -14,7 +14,8 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-    services.register(DiscogService(), as: ArtistService.self)
+    services.register(DiscogsService(), as: ArtistService.self)
+    services.register(DiscogsService(), as: PlaylistService.self)
 
     // Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
@@ -39,7 +40,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     // Configure migrations
     var migrations = MigrationConfig()
     migrations.add(model: User.self, database: .psql)
-	migrations.add(model: Playlist.self, database: .psql)
+    migrations.add(model: Playlist.self, database: .psql)
     services.register(migrations)
     
     // Currently this is needed for `revert`ing environment in unit tests
