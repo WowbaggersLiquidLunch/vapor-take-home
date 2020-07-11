@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ce41947d-b1a4-48f2-93d6-da090e75092c",
+		"_postman_id": "2cf9174f-a8de-4b61-8b80-e04ac16fd0a6",
 		"name": "Vapor Take Home",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -39,7 +39,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/artists/search?q=nirvana",
+							"raw": "http://localhost:8080/artists/search?q=Rick Astley",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -52,7 +52,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "nirvana"
+									"value": "Rick Astley"
 								}
 							]
 						}
@@ -65,7 +65,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/artists/:id/songs?q=teen spirit",
+							"raw": "http://localhost:8080/artists/:id/songs/search?q=Never Gonna Give You Up",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -74,19 +74,19 @@
 							"path": [
 								"artists",
 								":id",
-								"songs"
+								"songs",
+								"search"
 							],
 							"query": [
 								{
 									"key": "q",
-									"value": "teen spirit"
+									"value": "Never Gonna Give You Up"
 								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
-									"type": "string"
+									"value": "72872"
 								}
 							]
 						}
@@ -187,8 +187,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2",
-									"type": "string"
+									"value": "2"
 								}
 							]
 						}
@@ -214,8 +213,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2",
-									"type": "string"
+									"value": "2"
 								}
 							]
 						}
@@ -235,7 +233,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Sweet Playlist\",\n    \"description\": \"A fantastic description\"\n}",
+							"raw": "{\n    \"name\": \"Sweet Playlist\",\n    \"description\": \"A fantastic description\",\n    \"songs\": {\n        \"results\": [\n            {\n                \"id\": 420,\n                \"title\": \"test song\",\n                \"labels\": [\n                    \"test label\"\n                ]\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -318,8 +316,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
-									"type": "string"
+									"value": ""
 								}
 							]
 						}
@@ -354,8 +351,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1",
-									"type": "string"
+									"value": "1"
 								}
 							]
 						}
@@ -383,13 +379,11 @@
 							"variable": [
 								{
 									"key": "playlistID",
-									"value": "",
-									"type": "string"
+									"value": "1"
 								},
 								{
 									"key": "songID",
-									"value": "",
-									"type": "string"
+									"value": "249504"
 								}
 							]
 						}
@@ -416,16 +410,12 @@
 							],
 							"variable": [
 								{
-									"id": "1e61b154-6284-4960-9ff9-06bb5d1c94f3",
 									"key": "playlistID",
-									"value": "",
-									"type": "string"
+									"value": "1"
 								},
 								{
-									"id": "12226672-33a0-40a7-9eb8-17e4fd761cc1",
 									"key": "songID",
-									"value": "",
-									"type": "string"
+									"value": "420"
 								}
 							]
 						}
