@@ -14,8 +14,8 @@ struct DiscogService: ArtistService {
     /// - Parameters:
     ///   - artist: The name of the artist to look for.
     ///   - request: The request for searching for the artist.
-    /// - Returns: A future of an array of `Artist` instances.
-    func searchArtist(artist: String, on request: Request) throws -> Future<[Artist]> {
+    /// - Returns: A future instance `Artists`.
+    func searchArtist(artist: String, on request: Request) throws -> Future<Artists> {
         let searchURLRelativePath = "database/search"
         
         var searchURLComponents = URLComponents(
@@ -27,10 +27,12 @@ struct DiscogService: ArtistService {
         guard let url = searchURLComponents?.url else {
             fatalError("Couldn't create search URL")
         }
-
+        
         return try request.client().get(url, headers: headers).flatMap { response in
             try response.content.decode(ArtistSearchResponse.self).flatMap { artistSearch in
-                request.future(artistSearch.results)
+                request.future(
+                    Artists(results: artistSearch.results)
+                )
             }
         }
     }
@@ -40,15 +42,16 @@ struct DiscogService: ArtistService {
     ///   - title: The song title.
     ///   - artistID: The artist ID.
     ///   - request: The request for searching for the songs.
-    /// - Returns: A future of an array of all matching songs.
-    func searchSongs(title: String, byArtistID artistID: Int, on request: Request) throws -> Future<[Song]> {
+    /// - Returns: A future instance of `Songs` containing all matching songs.
+    func searchSongs(title: String, byArtistID artistID: Int, on request: Request) throws -> Future<Songs> {
         let artistReleasesURLRelativePath = "artists/\(artistID)/releases"
-
         let artistReleasesURL = discogsAPIBaseURL.appendingPathComponent(artistReleasesURLRelativePath)
         
         return try request.client().get(artistReleasesURL, headers: headers).flatMap { response in
             try response.content.decode(ArtistReleasesResponse.self).flatMap { artistReleases in
-                request.future(artistReleases.releases.filter { $0.title == title })
+                request.future(
+                    Songs(results: artistReleases.releases.filter { $0.title == title } )
+                )
             }
         }
     }

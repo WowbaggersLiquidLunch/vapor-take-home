@@ -13,9 +13,11 @@ final class UserController {
 
     /// Returns a list of all users.
     /// - Parameter request: The request for fetching all users.
-    /// - Returns: A future of an array of all users.
-    func index(_ request: Request) throws -> Future<[User]> {
-        User.query(on: request).all()
+    /// - Returns: A future instance of a `Users` containing all users.
+    func index(_ request: Request) throws -> Future<Users> {
+        User.query(on: request).all().map { users in
+            Users(results: users)
+        }
     }
 
     /// Finds the user specified in the given request's parameter.

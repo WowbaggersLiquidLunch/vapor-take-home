@@ -41,9 +41,7 @@ public func routes(_ router: Router) throws {
     
     // /artists/{artistID}/songs/search
     // Search for songs by artistID.
-    router.get("artists", Int.parameter, "songs", "search", use: artistController.searchSongsByArtistID)
-    
-    
+    router.get("artists", Int.parameter, "songs", "search", use: artistController.searchSongs)
     
     // MARK: - Playlists Requests
 }

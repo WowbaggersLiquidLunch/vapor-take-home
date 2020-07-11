@@ -1,6 +1,7 @@
 import Vapor
 
-struct Artist: Codable {
+/// An artist.
+struct Artist: Equatable, Codable {
     let id: Int
     let title: String
     let thumb: String?
@@ -15,5 +16,6 @@ struct Artist: Codable {
 }
 
 // MARK: - Content Conformance
+
 // Allows `Artist` to be encoded to and decoded from HTTP messages.
 extension Artist: Content { }

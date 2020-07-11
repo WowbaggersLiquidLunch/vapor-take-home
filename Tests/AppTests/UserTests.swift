@@ -34,6 +34,19 @@ class UserTests: XCTestCase {
         XCTAssertTrue(user.id != nil)
         XCTAssertEqual(user.name, "Tony")
     }
+    
+    func testListUsers() throws {
+        let newUser = User(name: "Doge")
+        try app.sendRequest(to: "/users", method: .POST, body: newUser)
+        
+        let users = try app.getResponse(to: "/users", method: .GET, decodeTo: Users.self)
+        let user = users.results.first
+        
+        XCTAssertNotNil(user)
+        XCTAssertNotNil(user?.id)
+        
+        XCTAssertEqual(user?.name, "Doge")
+    }
 
     func testGetUser() throws {
         let newUser = User(name: "Bruce")

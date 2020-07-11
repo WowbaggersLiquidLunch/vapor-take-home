@@ -4,43 +4,41 @@ import Vapor
 
 class MockArtistService: ArtistService, Service {
     
-    /// Predefined artists to return.
-    var artistsToReturn: [Artist] = []
+    /// Pre-defined artists to return.
+    var artistsToReturn: Artists = .init()
     /// The record of searches performed.
     var searchedArtists: [String] = []
     
-    /// Predefined songs to return.
-    var songsToReturn: [Song] = []
+    /// Pre-defined songs to return.
+    var songsToReturn: Songs = .init()
     /// The record of searches performed.
     var searchedSongsByArtistID: [(artistID: Int, songTitle: String)] = []
     
     func reset() {
-        artistsToReturn = []
+        artistsToReturn = Artists()
         searchedArtists = []
-        songsToReturn = []
+        songsToReturn = Songs()
         searchedSongsByArtistID = []
     }
 
     // MARK: - ArtistService Conformance
-    /// <#Description#>
+    /// Returns pre-defined artists, regardless of the actual request.
     /// - Parameters:
-    ///   - artist: <#artist description#>
-    ///   - request: <#request description#>
-    /// - Throws: <#description#>
-    /// - Returns: <#description#>
-    func searchArtist(artist: String, on request: Request) throws -> EventLoopFuture<[Artist]> {
+    ///   - artist: The artist to look for.
+    ///   - request: The request for looking for the given artist.
+    /// - Returns: A future of the array of the pre-defined artists.
+    func searchArtist(artist: String, on request: Request) throws -> EventLoopFuture<Artists> {
         searchedArtists.append(artist)
         return request.future(artistsToReturn)
     }
     
-    /// <#Description#>
+    /// Returns pre-defined songs, regardless of the actual request.
     /// - Parameters:
-    ///   - title: <#title description#>
-    ///   - artistID: <#artistID description#>
-    ///   - request: <#request description#>
-    /// - Throws: <#description#>
-    /// - Returns: <#description#>
-    func searchSongs(title: String, byArtistID artistID: Int, on request: Request) throws -> EventLoopFuture<[Song]> {
+    ///   - title: The title by which to look for the songs.
+    ///   - artistID: The ID of the artist associated with the songs.
+    ///   - request: The request for looking for songs by the given song title and artist ID.
+    /// - Returns: A future of the array of the pre-defined artists.
+    func searchSongs(title: String, byArtistID artistID: Int, on request: Request) throws -> EventLoopFuture<Songs> {
         searchedSongsByArtistID.append((artistID: artistID, songTitle: title))
         return request.future(songsToReturn)
     }
