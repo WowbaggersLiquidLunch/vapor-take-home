@@ -14,13 +14,13 @@ class ArtistTests: XCTestCase {
         do {
             try Application.reset()
             app = try Application.testable()
-            connection = try self.app.newConnection(to: .psql).wait()
+            connection = try app.newConnection(to: .psql).wait()
         }
         catch {
             fatalError(error.localizedDescription)
         }
 
-        request = Request(using: self.app)
+        request = Request(using: app)
         mockArtistService = try! request.make(MockArtistService.self)
         mockArtistService.reset()
     }
@@ -42,7 +42,7 @@ class ArtistTests: XCTestCase {
 
         let search = "rickastley"
 
-        let returnedArtists = try self.app.getResponse(
+        let returnedArtists = try app.getResponse(
             to: "/artists/search?q=\(search)",
             method: .GET,
             decodeTo: Artists.self
@@ -64,7 +64,7 @@ class ArtistTests: XCTestCase {
         let artistIDToSearch = 1337
         let songTitleToSearch = "Never Gonna Give You Up".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let returnedSongs = try self.app.getResponse(
+        let returnedSongs = try app.getResponse(
             to:"/artists/\(artistIDToSearch)/songs/search?q=\(songTitleToSearch)",
             method: .GET,
             decodeTo: Songs.self
