@@ -14,13 +14,21 @@ final class Playlist: PostgreSQLModel {
     var id: Int?
     var name: String
     var description: String
-    var songIDs: [Int]
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case description
-        case songIDs = "songs"
+    /// The playlist's collection of songs.
+    var songs: Songs
+    
+    /// Creates a playlist in memory.
+    /// - Parameters:
+    ///   - id: The playlist's ID, can be `nil` only before it's created in the database.
+    ///   - name: The playlist's name.
+    ///   - description: The playlist's description.
+    ///   - songs: The playlist's collection of songs.
+    init(id: Int? = nil, name: String, description: String, songs: Songs) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.songs = songs
     }
 }
 
