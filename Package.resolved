@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/vapor/crypto.git",
         "state": {
           "branch": null,
-          "revision": "df8eb7d8ae51787b3a0628aa3975e67666da936c",
-          "version": "3.3.3"
+          "revision": "105c2f875588bf40dd24c00cef3644bf8e327770",
+          "version": "3.4.1"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/vapor/fluent-postgresql.git",
         "state": {
           "branch": null,
-          "revision": "8e3eb9d24d54ac58c8d04c194ad6b24f0b1b667e",
-          "version": "1.0.0"
+          "revision": "a3d6587a64ff95cc3d5830d2d08dbe0638753716",
+          "version": "1.0.1"
         }
       },
       {
