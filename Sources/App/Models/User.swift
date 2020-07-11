@@ -16,11 +16,6 @@ final class User: PostgreSQLModel {
         self.id = id
         self.name = name
     }
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-    }
 }
 
 /// Allows `User` to be encoded to and decoded from HTTP messages.
