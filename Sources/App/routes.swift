@@ -12,34 +12,34 @@ public func routes(_ router: Router) throws {
     
     let userController = UserController()
     
-    // /users
+    // POST /users
     // Create a new user.
     router.post("users", use: userController.create)
     
-    // /users/{userID}
+    // GET /users/{userID}
     // Find user by ID.
     router.get("users", User.parameter, use: userController.find)
     
     // Returns a list of all `User`s.
     router.get("users", use: userController.index)
     
-    // /users/{userID}
-    // Update user.
+    // PUT /users/{userID}
+    // Update a user.
     router.put("users", User.parameter, use: userController.update)
     
-    // /users/{userID}
-    // delete a user
+    // DELETE /users/{userID}
+    // Delete a user
     router.delete("users", User.parameter, use: userController.delete)
     
     // MARK: - Artists Requests
     
     let artistController = ArtistController()
     
-    // /artists/search
+    // GET /artists/search
     // Search for an artist.
     router.get("artists", "search", use: artistController.searchArtist)
     
-    // /artists/{artistID}/songs/search
+    // GET /artists/{artistID}/songs/search
     // Search for songs by artistID.
     router.get("artists", Int.parameter, "songs", "search", use: artistController.searchSongs)
     

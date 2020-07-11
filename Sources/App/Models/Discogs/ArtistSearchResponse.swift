@@ -1,5 +1,6 @@
 import Foundation
 
+/// Discorgs's response structure to a search of an artist.
 struct ArtistSearchResponse: Decodable {
     struct Pagination: Decodable {
         struct URLs: Decodable {
@@ -23,5 +24,6 @@ struct ArtistSearchResponse: Decodable {
     }
 
     let pagination: Pagination
+    /// The artists.
     let results: [Artist]
 }

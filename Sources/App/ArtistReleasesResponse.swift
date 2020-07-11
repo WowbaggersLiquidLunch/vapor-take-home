@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Discorgs's response structure to a search of all songs by an artist.
 struct ArtistReleasesResponse: Decodable {
     struct Pagination: Decodable {
         struct URLs: Decodable {
@@ -30,5 +31,6 @@ struct ArtistReleasesResponse: Decodable {
     }
     
     let pagination: Pagination
+    /// The songs.
     let releases: [Song]
 }

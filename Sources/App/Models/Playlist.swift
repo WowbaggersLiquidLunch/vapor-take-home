@@ -8,11 +8,18 @@
 import Vapor
 import FluentPostgreSQL
 
+/// A playlist.
 final class Playlist: PostgreSQLModel {
+    
     typealias Database = PostgreSQLDatabase
     
+    /// The playlist's ID, can be `nil` only before it's created in the database.
     var id: Int?
+    
+    /// The playlist's name.
     var name: String
+    
+    /// The playlist's description.
     var description: String
     
     /// The playlist's collection of songs.
@@ -30,6 +37,7 @@ final class Playlist: PostgreSQLModel {
         self.description = description
         self.songs = songs
     }
+    
 }
 
 /// Allows `Playlist` to be encoded to and decoded from HTTP messages.
